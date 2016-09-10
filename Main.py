@@ -4,6 +4,7 @@ from PyQt4 import *
 from PyQt4 import QtGui, QtCore
 import os, sys
 from xml.etree import ElementTree
+from sys import platform
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -46,6 +47,16 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
 
+        if platform == "linux" or platform == "linux2":
+            self.save_folder = os.path.expanduser("~") + '/.config/unity3d/Ludeon Studios/RimWorld/Saves'
+            self.separator = '/'
+        elif platform == "darwin":
+            self.save_folder = os.path.expanduser("~") + '/Library/Application Support/RimWorld/Saves'
+            self.separator = '/'
+        elif platform == "win32":
+            self.save_folder = os.path.expanduser("~") + '\AppData\LocalLow\Ludeon Studios\RimWorld\Saves'
+            self.separator = '\\'
+
         self.retranslateUi(MainWindow)
         self.createDropdownBoxes(MainWindow)
         self.createButton(MainWindow)
@@ -56,7 +67,6 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Rimworld History Inspector", None))
 
     def createDropdownBoxes(self, MainWindow):
-        self.save_folder = os.path.expanduser("~") + '\AppData\LocalLow\Ludeon Studios\RimWorld\Saves'
         saves = os.listdir(self.save_folder)
 
         self.comboBox.addItem(_fromUtf8(""))
@@ -79,7 +89,7 @@ class Ui_MainWindow(object):
     def printTable(self, MainWindow):
         self.table.setRowCount(0)
 
-        self.full_file = self.save_folder + '\\' + self.current_save + '.rws'
+        self.full_file = self.save_folder + self.separator + self.current_save + '.rws'
 
         dom = ElementTree.parse(self.full_file)
         tales = dom.findall('game/taleManager/tales/')
