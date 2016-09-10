@@ -1,10 +1,4 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'Rimworld.ui'
-#
-# Created by: PyQt4 UI code generator 4.11.4
-#
-# WARNING! All changes made in this file will be lost!
+#Just a warning this code isnt pretty, as this is my first proper python project
 
 from PyQt4 import *
 from PyQt4 import QtGui, QtCore
@@ -206,17 +200,17 @@ class Ui_MainWindow(object):
 
             self.table.setItem(t, 0, QtGui.QTableWidgetItem(tale_types[t]))
 
-            #TICKS --> DATES
-            startTick = int(dates[0])
-            numTicks = int(dates[t]) - startTick
-            years = (int(numTicks) / 3600000)
-            num = numTicks - int(years) * 3600000
-            seasons = num / 900000
-            num -= int(seasons) * 900000
-            days = int(num) / 60000
-            num -= int(days) * 60000
-            hoursFloat = float(num) / 2500
-            print(int(years), int(seasons), int(days), int(hoursFloat))
+            #TICKS --> DATES (Unimplemented)
+            #startTick = int(dates[0])
+            #numTicks = int(dates[t]) - startTick
+            #years = (int(numTicks) / 3600000)
+            #num = numTicks - int(years) * 3600000
+            #seasons = num / 900000
+            #num -= int(seasons) * 900000
+            #days = int(num) / 60000
+            #num -= int(days) * 60000
+            #hoursFloat = float(num) / 2500
+            #print(int(years), int(seasons), int(days), int(hoursFloat))
 
             self.table.setItem(t, 1, QtGui.QTableWidgetItem(dates[t]))
             if 'Element' in str(temps[t]):
