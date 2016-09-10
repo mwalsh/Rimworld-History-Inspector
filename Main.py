@@ -172,7 +172,7 @@ class Ui_MainWindow(object):
                 second_faction = ''
 
             #Parse Faction Data
-            if second_faction == '' or None:
+            if second_faction == '' or second_faction == 'null' or None:
                 second_faction = ' - '
             else:
                 second_faction = second_faction.strip('Faction_')
